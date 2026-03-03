@@ -36,3 +36,31 @@ print("\n复数型:")
 print("complex_  complex128 简写，128位复数")
 print("complex64 双32位浮点(实部+虚部):", np.array([1+2j], dtype=np.complex64).dtype)
 print("complex128 双64位浮点(实部+虚部):", np.array([1+2j]).dtype)
+
+
+# np.iinfo 与 np.finfo
+
+#np.iinfo(dtype)
+
+#返回整数类型的机器限制信息。
+
+#| 属性 | 含义 |
+#|------|------|
+#| `min` | 该类型能表示的最小值 |
+#| `max` | 该类型能表示的最大值 |
+#| `bits` | 位数（如 int8 为 8） |
+#| `dtype` | 对应的 NumPy dtype |
+
+#--------------------------------
+
+#np.finfo(dtype)
+
+#返回浮点类型的机器限制信息。
+
+#| 属性 | 含义 |
+#|------|------|
+#| `min` | 最小正数 |
+#| `max` | 最大值 |
+#| `precision` | 十进制有效位数 |
+#| `eps` | 最小可表示正数（机器精度） |
+#--------------------------------
