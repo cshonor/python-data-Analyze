@@ -28,9 +28,9 @@ print(f"全1矩阵:\n{arr4}")
 print(f"等差数列 arange(0,10,2): {arr5}")
 print(f"线性间隔 linspace(0,1,5): {arr6}")
 
-# 2. 数组属性
+# 2. 数组属性 (arr2 为 [[1,2,3],[4,5,6]]，2行3列)
 print("\n=== 数组属性 ===")
-print(f"shape 形状: {arr2.shape}")
-print(f"ndim 维度: {arr2.ndim}")
-print(f"size 元素个数: {arr2.size}")
-print(f"dtype 数据类型: {arr2.dtype}")
+print(f"shape 形状: {arr2.shape}")    # (2, 3)
+print(f"ndim 维度: {arr2.ndim}")      # 2
+print(f"size 元素个数: {arr2.size}")  # 6
+print(f"dtype 数据类型: {arr2.dtype}")  # int64 或 int32
