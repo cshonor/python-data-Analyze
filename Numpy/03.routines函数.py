@@ -10,7 +10,27 @@ NumPy 03 - Routines 函数
   np.arange([start,] stop [,step,] dtype=None)
   np.random.randint(low, high=None, size=None, dtype='l')
   np.random.normal(loc=0, scale=1, size=None)   # 正态分布
-
+--------------------------------
+参数详解：
+  shape	数组的形状，可以是整数（一维）、元组（多维）
+  dtype	数组元素的数据类型（如 np.int8、np.float64 等）
+  order='C' 是 NumPy 创建 / 操作数组时，指定数组在内存中的存储顺序的参数，
+'C' 是默认值，代表「C 语言风格的行优先存储」。
+  fill_value	用于 np.full 填充的常数值
+    N	方阵的行数（M 为列数，默认 N）
+k	对角线偏移，0 为主对角线，正数向上偏移，负数向下偏移
+start	起始值（默认 0）
+stop	终止值（不包含）
+num	等分区间的数量（默认 50）
+endpoint=True 时包含右端点
+retstep=False 不返回步长
+dtype=None 自动推断数据类型
+low	随机整数范围的下限（包含）
+high	随机整数范围的上限（不包含）
+size	生成数组的大小（如 (2, 3) 表示 2x3 矩阵）
+loc	正态分布的均值
+scale	正态分布的标准差
+--------------------------------
 用途详解：
 
   np.zeros 全 0 数组
