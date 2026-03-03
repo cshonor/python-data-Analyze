@@ -16,6 +16,7 @@ arr1 = np.array([1, 2, 3, 4, 5])
 arr2 = np.array([[1, 2, 3], [4, 5, 6]])
 arr3 = np.zeros((3, 3))
 arr4 = np.ones((2, 4))
+#这行代码是基于 NumPy 库创建一个指定形状的数组，核心作用是生成一个2 行 4 列、所有元素值都为 1 的二维数组。
 arr5 = np.arange(0, 10, 2)
 arr6 = np.linspace(0, 1, 5)
 
