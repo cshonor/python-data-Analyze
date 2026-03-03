@@ -1,12 +1,20 @@
 """
 NumPy 02 - ndarray 元素统一
 
-ndarray 要求所有元素必须是同一种数据类型（dtype）。
-若传入混合类型，NumPy 会自动提升为更“宽”的类型以保持统一。
+1. numpy 默认 ndarray 的所有元素的类型是相同的
+2. 如果传进来的列表中包含不同的类型，则统一为同一类型
+   优先级：str > float > int
 """
 import numpy as np
 
-print("=== 元素类型自动统一 ===")
+print("=== 优先级 str > float > int 示例 ===")
+print("int  alone →", np.array([1, 2, 3]).dtype)
+print("int+float →", np.array([1, 2, 3.0]).dtype)      # float 优先
+print("int+str   →", np.array([1, 2, "x"]).dtype)      # str 优先
+print("float+str →", np.array([1.0, 2.0, "x"]).dtype)  # str 优先
+print("int+float+str →", np.array([1, 2.5, "a"]).dtype)
+
+print("\n=== 元素类型自动统一 ===")
 
 # 1. 纯整数 → int
 arr1 = np.array([1, 2, 3])
