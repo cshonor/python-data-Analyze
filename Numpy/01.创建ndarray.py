@@ -20,6 +20,7 @@ arr5 = np.arange(0, 10, 2)
 arr6 = np.linspace(0, 1, 5)
 
 print(f"一维数组: {arr1}")
+print(f"类型验证 type(arr1): {type(arr1)}")  # numpy.ndarray
 print(f"二维数组:\n{arr2}")
 print(f"零矩阵:\n{arr3}")
 print(f"全1矩阵:\n{arr4}")
