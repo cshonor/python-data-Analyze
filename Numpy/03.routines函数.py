@@ -42,6 +42,7 @@ scale	正态分布的标准差
     - 神经网络权重初始化（常配合 scale）
     - 掩码：与目标数组相乘做筛选
     - 概率：均匀先验
+    - shape=(3,) 一维 vs shape=(1,3) 二维：维度不同，矩阵运算行为不同（ML 中重要）
 
   np.full 指定值填充
     - 批量设置常数：如填充 -1、NaN
@@ -82,7 +83,11 @@ import numpy as np
 
 print("=== 1. 数组创建类 routines ===")
 print("np.zeros(3):", np.zeros(3))
+
+# np.ones 不同 shape 示例：shape=(3,) 一维 vs shape=(1,3) 二维（行向量）
 print("np.ones((2, 3)):\n", np.ones((2, 3)))
+print("np.ones((3,)) 一维:", np.ones((3,)))      # 维度 (3,)
+print("np.ones((1, 3)) 行向量:\n", np.ones((1, 3)))  # 维度 (1, 3)，矩阵运算时不同
 print("np.full((2, 2), 7):", np.full((2, 2), 7))
 print("np.eye(3) 单位矩阵:\n", np.eye(3))
 print("np.arange(0, 10, 2):", np.arange(0, 10, 2))
@@ -101,3 +106,13 @@ print("np.sum(arr):", np.sum(arr))
 print("np.mean(arr):", np.mean(arr))
 print("np.std(arr):", np.std(arr))
 print("np.min(arr), np.max(arr):", np.min(arr), np.max(arr))
+
+# (3,) 一维 vs (1,3) 二维 在矩阵运算中的区别
+print("\n=== 4. shape (3,) vs (1,3) 矩阵运算区别 ===")
+a_1d = np.ones((3,))      # 一维 → array([1., 1., 1.])
+a_2d = np.ones((1, 3))    # 二维行向量 → array([[1., 1., 1.]])
+B = np.array([[1, 2, 3], [4, 5, 6]])  # 2x3
+print("a_1d shape:", a_1d.shape, "a_2d shape:", a_2d.shape)
+print("a_1d + B (广播):\n", a_1d + B)   # (3,) 与 (2,3) 广播
+print("a_2d + B (广播):\n", a_2d + B)   # (1,3) 与 (2,3) 广播
+# 与矩阵乘法时：a_1d 不能直接 @ 矩阵，a_2d 可以
