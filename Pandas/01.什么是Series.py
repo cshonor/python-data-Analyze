@@ -21,8 +21,8 @@ print("s.values:", s2.values)           # [10 20 30]，类型 numpy.ndarray
 print("type(s.values):", type(s2.values))
 print("s.values.tolist():", s2.values.tolist())  # 转成 Python 列表 [10, 20, 30]
 print("s['b'] 或 s.iloc[1]:", s2["b"])  # 单个数值 20
-
-# 注意：values 是属性（无括号）；value_counts() 是方法（有括号）统计出现次数
+#iloc 是 pandas 中用于基于整数位置（integer location）进行数据选择的属性，s.iloc[1] 表示选取 Series 对象 s 中位置索引为 1 的元素（注意：pandas 的整数位置索引从 0 开始）。 
+# 注意：values 是属性（无括号）；value_counts() 是方法（有括号）统计出现次数  
 
 print("\n=== values 与 index 的类型 ===")
 print("type(s.values):", type(s2.values))   # numpy.ndarray，用于向量化计算
