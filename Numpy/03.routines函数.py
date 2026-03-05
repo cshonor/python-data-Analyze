@@ -90,7 +90,9 @@ print("np.ones((3,)) 一维:", np.ones((3,)))           # → [1., 1., 1.]
 print("np.ones((1, 3)) 行向量:\n", np.ones((1, 3)))   # → [[1., 1., 1.]]
 print("np.ones((3, 1)) 列向量:\n", np.ones((3, 1)))   # → [[1.],[1.],[1.]]
 print("np.full(shape=(3,3), fill_value=6):\n", np.full(shape=(3, 3), fill_value=6))  # → [[6,6,6],...]
-print("np.eye(3) 单位矩阵:\n", np.eye(3))
+print("np.eye(N=3) 单位矩阵:\n", np.eye(N=3))  # → [[1.,0.,0.],[0.,1.,0.],[0.,0.,1.]]
+print("np.eye(N=3, M=2) 非方阵:\n", np.eye(N=3, M=2))  # → [[1.,0.],[0.,1.],[0.,0.]]
+print("np.eye(N=3, k=-1) 下对角线:\n", np.eye(N=3, k=-1))  # k=-1 主对角线下移 → [[0,0,0],[1,0,0],[0,1,0]]
 print("np.arange(0, 10, 2):", np.arange(0, 10, 2))
 print("np.linspace(0, 1, 5):", np.linspace(0, 1, 5))
 
