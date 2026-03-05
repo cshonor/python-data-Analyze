@@ -17,7 +17,9 @@ arr = np.array([1, 2, 3])
 s1 = pd.Series(arr)           # From ndarray（引用）
 s2 = pd.Series([1, 2, 3])     # From List（副本）
 s3 = pd.Series({"a": 10, "b": 20, "c": 30})  # From dict
-s4 = pd.Series(99, index=["x", "y", "z"])    # From scalar，必须指定 index
+s4 = pd.Series(99, index=["x", "y", "z"])
+#这段代码的作用是：创建一个 pandas 的 Series 对象 s4，其中所有元素的值都是 99，并且自定义了索引标签为 ["x", "y", "z"]。
+# From scalar，必须指定 index
 print("From ndarray:", s1.values)   # [1 2 3]
 print("From dict:\n", s3)           # a 10, b 20, c 30
 print("From scalar:\n", s4)         # x 99, y 99, z 99
