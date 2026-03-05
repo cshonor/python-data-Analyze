@@ -84,10 +84,11 @@ import numpy as np
 print("=== 1. 数组创建类 routines ===")
 print("np.zeros(3):", np.zeros(3))
 
-# np.ones 不同 shape 示例：shape=(3,) 一维 vs shape=(1,3) 二维（行向量）
+# np.ones 不同 shape：(3,)一维 (1,3)行向量 (3,1)列向量
 print("np.ones((2, 3)):\n", np.ones((2, 3)))
-print("np.ones((3,)) 一维:", np.ones((3,)))      # 维度 (3,)
-print("np.ones((1, 3)) 行向量:\n", np.ones((1, 3)))  # 维度 (1, 3)，矩阵运算时不同
+print("np.ones((3,)) 一维:", np.ones((3,)))           # → [1., 1., 1.]
+print("np.ones((1, 3)) 行向量:\n", np.ones((1, 3)))   # → [[1., 1., 1.]]
+print("np.ones((3, 1)) 列向量:\n", np.ones((3, 1)))   # → [[1.],[1.],[1.]]
 print("np.full((2, 2), 7):", np.full((2, 2), 7))
 print("np.eye(3) 单位矩阵:\n", np.eye(3))
 print("np.arange(0, 10, 2):", np.arange(0, 10, 2))
