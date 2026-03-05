@@ -102,7 +102,9 @@ print("\n=== 2. 随机数 routines ===")
 np.random.seed(42)
 print("np.random.rand(2, 3):\n", np.random.rand(2, 3))
 print("np.random.randint(1, 10, size=5):", np.random.randint(1, 10, size=5))
+print("np.random.randint(low=0, high=100, size=(3,5)):\n", np.random.randint(low=0, high=100, size=(3, 5)))
 print("np.random.normal(0, 1, 5) 正态分布:", np.random.normal(0, 1, 5))
+print("np.random.randn(2, 3) 标准正态 N(0,1):\n", np.random.randn(2, 3))  # 均值0 方差1
 
 print("\n=== 3. 数学 / 统计 routines ===")
 arr = np.array([1, 2, 3, 4, 5])
