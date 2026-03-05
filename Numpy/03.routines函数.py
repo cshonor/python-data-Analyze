@@ -94,7 +94,9 @@ print("np.eye(N=3) 单位矩阵:\n", np.eye(N=3))  # → [[1.,0.,0.],[0.,1.,0.],
 print("np.eye(N=3, M=2) 非方阵:\n", np.eye(N=3, M=2))  # → [[1.,0.],[0.,1.],[0.,0.]]
 print("np.eye(N=3, k=-1) 下对角线:\n", np.eye(N=3, k=-1))  # k=-1 主对角线下移 → [[0,0,0],[1,0,0],[0,1,0]]
 print("np.arange(0, 10, 2):", np.arange(0, 10, 2))
-print("np.linspace(0, 1, 5):", np.linspace(0, 1, 5))
+print("np.linspace(0, 1, 5):", np.linspace(0, 1, 5))  # 默认 endpoint=True 含右端
+print("np.linspace(0,100,10,endpoint=False):", np.linspace(0, 100, 10, endpoint=False))  # 不含100
+print("np.linspace(0,360,4,endpoint=False):", np.linspace(0, 360, 4, endpoint=False))    # 0,90,180,270 角度分4段
 
 print("\n=== 2. 随机数 routines ===")
 np.random.seed(42)
