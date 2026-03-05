@@ -18,14 +18,14 @@ s1 = pd.Series(arr)           # From ndarray（引用）
 s2 = pd.Series([1, 2, 3])     # From List（副本）
 s3 = pd.Series({"a": 10, "b": 20, "c": 30})  # From dict
 s4 = pd.Series(99, index=["x", "y", "z"])    # From scalar，必须指定 index
-print("From ndarray:", s1.values)
-print("From dict:\n", s3)
-print("From scalar:\n", s4)
+print("From ndarray:", s1.values)   # [1 2 3]
+print("From dict:\n", s3)           # a 10, b 20, c 30
+print("From scalar:\n", s4)         # x 99, y 99, z 99
 
 print("\n=== 1.2.2 Series 属性 ===")
 s = pd.Series([10, 20, 30], index=["a", "b", "c"], name="my_series")
-print("name:", s.name)
-print("shape:", s.shape)
-print("size:", s.size)
-print("index:", s.index)
-print("values:", s.values)
+print("name:", s.name)     # my_series
+print("shape:", s.shape)   # (3,)
+print("size:", s.size)     # 3
+print("index:", s.index)   # Index(['a','b','c'], dtype='object')
+print("values:", s.values) # [10 20 30]
