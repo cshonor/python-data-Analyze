@@ -66,6 +66,14 @@ scale	正态分布的标准差
     - 蒙特卡洛模拟、随机采样
     - 生成随机权重、dropout 掩码
 
+  np.random.random  [0,1) 均匀分布（与 rand 类似，参数为 size=）
+    - size=(10,1) 可指定多维形状
+    - 左闭右开，不含 1
+
+  np.random.randn  标准正态 N(0,1)
+    - 无需参数，直接 randn(d0,d1,...) 指定形状
+    - 深度学习权重初始化常用
+
   np.random.randint  随机整数
     - 随机抽样、打乱索引
     - 模拟掷骰子、抽奖
@@ -107,6 +115,7 @@ print("np.random.randint(low=0, high=100, size=(3,5)):\n", np.random.randint(low
 print("np.random.randn(2,3):\n", np.random.randn(2, 3))
 print("np.random.normal(loc=175, scale=10, size=5) 身高模拟:", np.random.normal(loc=175, scale=10, size=5))
 print("np.random.random(5) [0,1)左闭右开:", np.random.random(5))
+print("np.random.random(size=(10,1)) 10x1列向量:\n", np.random.random(size=(10, 1)))
 
 print("\n=== 3. 数学 / 统计 routines ===")
 arr = np.array([1, 2, 3, 4, 5])
