@@ -62,11 +62,11 @@ scale	正态分布的标准差
     - 插值采样：在 [a,b] 内均匀取 n 个点
     - endpoint=True 时包含右端点
 
-  np.random.rand  [0,1) 均匀分布
+  np.random.rand  [0,1) 均匀分布 均匀分布，在 [0, 1) 内等概率采样 
     - 蒙特卡洛模拟、随机采样
     - 生成随机权重、dropout 掩码
 
-  np.random.random  [0,1) 均匀分布（与 rand 类似，参数为 size=）
+  np.random.random  [0,1) 均匀分布  均匀，在 [0, 1) 内等概率采样（与 rand 类似，参数为 size=）
     - size=(10,1) 可指定多维形状
     - 左闭右开，不含 1
 
