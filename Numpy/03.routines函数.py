@@ -107,7 +107,7 @@ print("np.linspace(0,100,10,endpoint=False):", np.linspace(0, 100, 10, endpoint=
 print("np.linspace(0,360,4,endpoint=False):", np.linspace(0, 360, 4, endpoint=False))    # 0,90,180,270 角度分4段
 
 print("\n=== 2. 随机数 routines ===")
-np.random.seed(42)
+np.random.seed(42)#NumPy 库中用于设置随机数生成器种子的函数，核心作用是让随机数生成结果可复现（固定化）。
 print("np.random.rand(2, 3):\n", np.random.rand(2, 3))
 print("np.random.randint(1, 10, size=5):", np.random.randint(1, 10, size=5))
 print("np.random.randint(low=0, high=100, size=(3,5)):\n", np.random.randint(low=0, high=100, size=(3, 5)))
