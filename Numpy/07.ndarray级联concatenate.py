@@ -18,6 +18,8 @@ print("=== 1. 按行拼接（竖着拼，axis=0）===")
 a = np.array([[1, 2], [3, 4]])
 b = np.array([[5, 6]])
 c = np.concatenate([a, b], axis=0)
+#np.concatenate 是 NumPy 中最核心的数组拼接函数，
+#能将多个形状兼容的数组沿指定维度（轴）合并为一个新数组，是数据预处理、矩阵操作中高频使用的工具。
 print("a:\n", a)
 print("b:\n", b)
 print("concatenate axis=0:\n", c)
