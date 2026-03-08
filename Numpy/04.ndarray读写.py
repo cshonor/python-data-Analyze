@@ -15,12 +15,21 @@ l1 = [1, 2, 3, 4, 5]
 print("l1[1]:", l1[1])      # 2
 print("l1[-1]:", l1[-1])    # 5 负索引取最后
 
+# 1D ndarray：直接索引、变量索引
+np.random.seed(42)
+arr1 = np.random.randint(0, 100, size=10)
+print("arr1:", arr1)
+print("arr1[1], arr1[2]:", arr1[1], arr1[2])  # 直接索引
+index = 1
+print("arr1[index]:", arr1[index])  # 变量索引
+
 l2 = [[1, 2, 3], [2, 3, 4]]
 arr = np.array(l2)
 print("l2[1]:", l2[1])      # [2, 3, 4]
 print("l2[1][0]:", l2[1][0])  # 2 嵌套访问
 print("arr[1]:", arr[1])    # array([2, 3, 4])
-print("arr[1,0]:", arr[1, 0])  # 2 ndarray 用逗号
+# ndarray的高维数组访问，使用 [dim1_index, dim2_index, ...]
+print("arr[1,0]:", arr[1, 0])  # 2
 
 print("\n=== 1. 二进制格式 .npy（推荐，保留 dtype 等完整信息）===")
 np.save("temp_array.npy", arr)
