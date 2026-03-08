@@ -107,14 +107,27 @@ print("np.linspace(0,100,10,endpoint=False):", np.linspace(0, 100, 10, endpoint=
 print("np.linspace(0,360,4,endpoint=False):", np.linspace(0, 360, 4, endpoint=False))    # 0,90,180,270 角度分4段
 
 print("\n=== 2. 随机数 routines ===")
-np.random.seed(42)#NumPy 库中用于设置随机数生成器种子的函数，核心作用是让随机数生成结果可复现（固定化）。
+np.random.seed(42)
+#NumPy 库中用于设置随机数生成器种子的函数，核心作用是让随机数生成结果可复现（固定化）。
 print("np.random.rand(2, 3):\n", np.random.rand(2, 3))
+#作用：生成取值范围在 [0.0, 1.0) 之间的随机浮点数（包含 0.0，不包含 1.0）；
+#参数：(2, 3) 表示输出数组的形状，即2 行 3 列的二维数组；
+#区别于 randint：rand 生成浮点数，randint 生成整数；且 rand 无需指定上下限（固定 0 到 1）
 print("np.random.randint(1, 10, size=5):", np.random.randint(1, 10, size=5))
+#若只传两个参数（如 np.random.randint(1, 10)），则只生成1 个随机整数（而非数组）；
+#若想生成二维数组，可将 size 设为元组，比如 size=(2,3) 会生成 2 行 3 列的数组；
+#该函数生成的是伪随机数，若需固定结果（如复现实验），可先用 np.random.seed(固定数字) 设定随机种子
 print("np.random.randint(low=0, high=100, size=(3,5)):\n", np.random.randint(low=0, high=100, size=(3, 5)))
 # randn(d0,d1,...)=标准正态 N(0,1)，如 randn(10,5) 生成 10x5 矩阵
 print("np.random.randn(2,3):\n", np.random.randn(2, 3))
 print("np.random.normal(loc=175, scale=10, size=5) 身高模拟:", np.random.normal(loc=175, scale=10, size=5))
+#np.random.normal(loc, scale, size) 生成正态分布随机数，loc 是均值（中心），scale 是标准差（离散程度），size 是输出形状；
+#正态分布的数值集中在均值附近，标准差越大，数值范围越广；
+#设定 np.random.seed(固定值) 可固定随机结果，size 传元组可生成多维数组。
 print("np.random.random(5) [0,1)左闭右开:", np.random.random(5))
+#作用：生成取值范围在 [0.0, 1.0) 之间的随机浮点数（包含 0.0，不包含 1.0）；
+#参数 5：表示输出数组的总元素个数 / 形状，这里传入单个整数 5，会生成长度为 5 的一维数组；
+#关键区别：random() 的参数需是整数或元组（如 size=(2,3)），而 rand() 是直接传多个整数（如 rand(2,3)），本质功能完全一致。
 print("np.random.random(size=(10,1)) 10x1列向量:\n", np.random.random(size=(10, 1)))
 
 print("\n=== 3. 数学 / 统计 routines ===")
