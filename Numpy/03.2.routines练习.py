@@ -40,6 +40,19 @@ import numpy as np
 # arr7 = 
 # print("7:", arr7)
 
+# ========== 1.3.5 习题 ==========
+# 习题 1：形状(3,4)的二维数组，取值范围(-5,5)
+# arr = np.random.randint(-5, 6, (3, 4))
+
+# 习题 2：等差数列，步长3，长度5
+# arr = np.arange(0, 15, 3)  # [0,3,6,9,12]
+
+# 习题 3：3维(100,100,3)，0-1随机，dtype=float64
+# arr = np.random.random((100, 100, 3)).astype(np.float64)
+
+# 习题 4：圆等分8份的弧度（np.pi）
+# angles = np.linspace(0, 2*np.pi, 9)[:-1]  # 或 np.linspace(0, 2*np.pi, 8, endpoint=False)
+
 # ========== 参考答案（取消注释可对比） ==========
 # arr1 = np.zeros((2, 4))
 # arr2 = np.full((3, 3), 5)
