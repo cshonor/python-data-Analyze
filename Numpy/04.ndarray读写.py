@@ -76,9 +76,10 @@ print("arr2[:, [0, 1]] 取第 0、1 列:\n", arr2[:, [0, 1]])
 
 # 1.4.3 切片访问
 print("\n=== 1.4.3 切片访问 ===")
-# arr1 切片：正索引、负索引
-print("arr1[0:3]:", arr1[0:3])   # 前 3 个元素
-print("arr1[-4:]:", arr1[-4:])   # 后 4 个元素
+# arr1 切片：正索引、负索引、步长
+print("arr1[0:3]:", arr1[0:3])     # 前 3 个元素
+print("arr1[-4:]:", arr1[-4:])     # 后 4 个元素
+print("arr1[0:-1:2]:", arr1[0:-1:2])  # 从索引 0 到倒数第 2 个，步长 2
 perm = np.random.permutation(10)
 print("np.random.permutation(10):", perm)  # 生成 0-9 的随机排列
 # 切片 [start:stop:step]，与 Python list 一致
