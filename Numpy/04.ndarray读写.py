@@ -42,12 +42,19 @@ print("np.random.permutation(10):", perm)#生成10个随机整数
 print("perm[2:5]:", perm[2:5])   # 索引 2 到 4
 print("perm[::2]:", perm[::2])   # 步长 2
 print("perm[::-1]:", perm[::-1]) # 反转
+# 在原始数据中，随机取3个数
+rand_indices = np.random.permutation(10)[[0, 1, 2]]  # 或 [:3] 这行代码的作用是生成 0-9 的随机乱序数组，然后取前 3 个元素
+#[[0, 1, 2]]：这是双层中括号，表示取前 3 个元素。
+#这是 NumPy 的花式索引（Fancy Indexing），表示从前面的乱序数组中，取出索引为 0、1、2 的元素（也就是前 3 个元素）。
+#注意：这里用双层中括号 [[0,1,2]] 和单层 [0,1,2] 效果一致，都是取这三个索引的元素，返回一维数组。
+print("随机3个索引:", rand_indices)
+print("arr1中对应值:", arr1[rand_indices])
 
 print("\n=== 1. 二进制格式 .npy（推荐，保留 dtype 等完整信息）===")
 np.save("temp_array.npy", arr)#将数组保存为二进制文件，文件名是temp_array.npy np.save() 是 NumPy 库中用于将数组保存到二进制文件（.npy 格式）的核心函数
 loaded = np.load("temp_array.npy")#从二进制文件中加载数组，文件名是temp_array.npy
 print("保存后读取:", loaded)
-os.remove("temp_array.npy")  # 清理临时文件
+os.remove("temp_array.npy")  # 清理文件
 
 print("\n=== 2. 文本格式 .txt / .csv ===")
 np.savetxt("temp_data.txt", arr, fmt="%d")#将数组保存为文本文件，文件名是temp_data.txt
