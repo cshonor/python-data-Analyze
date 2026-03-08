@@ -32,8 +32,38 @@ arr3 = np.array([[1, 2, 3], [4, 5, 6]])
 arr4 = np.array([[7, 8, 9], [10, 11, 12]])
 res2 = np.concatenate((arr3, arr4), axis=0)  # 沿行拼接，行数增加
 print("沿行拼接 axis=0:\n", res2)
+
 res3 = np.concatenate((arr3, arr4), axis=1)  # 沿列拼接，列数增加
 print("沿列拼接 axis=1:\n", res3)
+# np.concatenate axis=0 结果说明
+
+## 代码
+
+#```python
+arr3 = np.array([[1, 2, 3], [4, 5, 6]])
+arr4 = np.array([[7, 8, 9], [10, 11, 12]])
+res2 = np.concatenate((arr3, arr4), axis=0)
+print("沿行拼接 axis=0:\n", res2)
+#```
+
+## 结果
+
+#```
+#[[ 1  2  3]
+# [ 4  5  6]
+# [ 7  8  9]
+# [10 11 12]]
+#```
+
+## 说明
+
+#| 变量 | 形状 | 说明 |
+#|------|------|------|
+#| arr3 | (2, 3) | 2 行 3 列 |
+#| arr4 | (2, 3) | 2 行 3 列 |
+#| res2 | (4, 3) | 沿 axis=0 拼接，行数增加 |
+
+#**axis=0**：沿行方向拼接（上下拼），行数变为 4，列数不变仍为 3。
 
 # 场景3：高维数组拼接（3维，axis=0 沿深度）
 print("\n=== 3. 三维数组拼接 ===")
