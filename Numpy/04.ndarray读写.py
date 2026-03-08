@@ -37,26 +37,26 @@ print("arr[1,0]:", arr[1, 0])  # 2
 # 1.4.3 切片访问
 print("\n=== 1.4.3 切片访问 ===")
 perm = np.random.permutation(10)
-print("np.random.permutation(10):", perm)
+print("np.random.permutation(10):", perm)#生成10个随机整数
 # 切片 [start:stop:step]，与 Python list 一致
 print("perm[2:5]:", perm[2:5])   # 索引 2 到 4
 print("perm[::2]:", perm[::2])   # 步长 2
 print("perm[::-1]:", perm[::-1]) # 反转
 
 print("\n=== 1. 二进制格式 .npy（推荐，保留 dtype 等完整信息）===")
-np.save("temp_array.npy", arr)
-loaded = np.load("temp_array.npy")
+np.save("temp_array.npy", arr)#将数组保存为二进制文件，文件名是temp_array.npy np.save() 是 NumPy 库中用于将数组保存到二进制文件（.npy 格式）的核心函数
+loaded = np.load("temp_array.npy")#从二进制文件中加载数组，文件名是temp_array.npy
 print("保存后读取:", loaded)
 os.remove("temp_array.npy")  # 清理临时文件
 
 print("\n=== 2. 文本格式 .txt / .csv ===")
-np.savetxt("temp_data.txt", arr, fmt="%d")
-loaded_txt = np.loadtxt("temp_data.txt")
+np.savetxt("temp_data.txt", arr, fmt="%d")#将数组保存为文本文件，文件名是temp_data.txt
+loaded_txt = np.loadtxt("temp_data.txt")#从文本文件中加载数组，文件名是temp_data.txt
 print("savetxt 保存后 loadtxt 读取:\n", loaded_txt)
 os.remove("temp_data.txt")
 
 print("\n=== 3. CSV 格式（指定分隔符）===")
-np.savetxt("temp_data.csv", arr, delimiter=",", fmt="%d")
-loaded_csv = np.loadtxt("temp_data.csv", delimiter=",")
+np.savetxt("temp_data.csv", arr, delimiter=",", fmt="%d")#将数组保存为CSV文件，文件名是temp_data.csv
+loaded_csv = np.loadtxt("temp_data.csv", delimiter=",")#从CSV文件中加载数组，文件名是temp_data.csv
 print("CSV 读取:\n", loaded_csv)
 os.remove("temp_data.csv")
