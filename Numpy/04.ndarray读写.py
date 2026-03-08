@@ -1,16 +1,28 @@
 """
 NumPy 04 - ndarray 读写
 
-NumPy 支持将数组保存到文件、从文件加载。
-常用：.npy（二进制）/ .npz（压缩）/ .txt .csv（文本）
+1.4.2 列表/ndarray 访问：类似 Python list，arr[1] 取第 2 行
+  l2 = [[1,2,3],[2,3,4]]  →  l2[1] = [2,3,4]
+  arr = np.array(l2)       →  arr[1] = array([2,3,4])
+
+文件读写：.npy（二进制）/ .npz（压缩）/ .txt .csv（文本）
 """
 import numpy as np
 import os
 
-# 创建示例数组
-arr = np.array([[1, 2, 3], [4, 5, 6]])
+# 列表/ndarray 访问：正索引、负索引、嵌套
+l1 = [1, 2, 3, 4, 5]
+print("l1[1]:", l1[1])      # 2
+print("l1[-1]:", l1[-1])    # 5 负索引取最后
 
-print("=== 1. 二进制格式 .npy（推荐，保留 dtype 等完整信息）===")
+l2 = [[1, 2, 3], [2, 3, 4]]
+arr = np.array(l2)
+print("l2[1]:", l2[1])      # [2, 3, 4]
+print("l2[1][0]:", l2[1][0])  # 2 嵌套访问
+print("arr[1]:", arr[1])    # array([2, 3, 4])
+print("arr[1,0]:", arr[1, 0])  # 2 ndarray 用逗号
+
+print("\n=== 1. 二进制格式 .npy（推荐，保留 dtype 等完整信息）===")
 np.save("temp_array.npy", arr)
 loaded = np.load("temp_array.npy")
 print("保存后读取:", loaded)
