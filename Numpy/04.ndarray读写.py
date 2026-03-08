@@ -22,6 +22,9 @@ print("arr1:", arr1)
 print("arr1[1], arr1[2]:", arr1[1], arr1[2])  # 直接索引
 index = 1
 print("arr1[index]:", arr1[index])  # 变量索引
+# fancy indexing：用整数列表作为索引，按顺序、可重复取元素
+index1 = [1, 2, 1, 2, 1, 2]
+print("arr1[index1]:", arr1[index1])
 
 l2 = [[1, 2, 3], [2, 3, 4]]
 arr = np.array(l2)
@@ -30,6 +33,15 @@ print("l2[1][0]:", l2[1][0])  # 2 嵌套访问
 print("arr[1]:", arr[1])    # array([2, 3, 4])
 # ndarray的高维数组访问，使用 [dim1_index, dim2_index, ...]
 print("arr[1,0]:", arr[1, 0])  # 2
+
+# 1.4.3 切片访问
+print("\n=== 1.4.3 切片访问 ===")
+perm = np.random.permutation(10)
+print("np.random.permutation(10):", perm)
+# 切片 [start:stop:step]，与 Python list 一致
+print("perm[2:5]:", perm[2:5])   # 索引 2 到 4
+print("perm[::2]:", perm[::2])   # 步长 2
+print("perm[::-1]:", perm[::-1]) # 反转
 
 print("\n=== 1. 二进制格式 .npy（推荐，保留 dtype 等完整信息）===")
 np.save("temp_array.npy", arr)
