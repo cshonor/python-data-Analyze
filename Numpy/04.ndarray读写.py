@@ -34,6 +34,12 @@ print("arr[1]:", arr[1])    # array([2, 3, 4])
 # ndarray的高维数组访问，使用 [dim1_index, dim2_index, ...]
 print("arr[1,0]:", arr[1, 0])  # 2
 
+# 2D fancy indexing：取多行、取多列
+arr2 = np.random.randint(0, 100, size=(5, 5))
+print("\narr2 (5x5):\n", arr2)
+print("arr2[[0, 1]] 取第 0、1 行:\n", arr2[[0, 1]])
+print("arr2[:, [0, 1]] 取第 0、1 列:\n", arr2[:, [0, 1]])
+
 # 1.4.3 切片访问
 print("\n=== 1.4.3 切片访问 ===")
 perm = np.random.permutation(10)
