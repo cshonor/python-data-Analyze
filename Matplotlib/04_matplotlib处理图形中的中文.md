@@ -7,7 +7,7 @@
 ```python
 import matplotlib.pyplot as plt
 
-plt.rcParams['font.sans-serif'] = ['SimHei']  # 黑体
+plt.rcParams['font.sans-serif'] = ['SimHei']  # 黑体  rcParams是 Python 可视化库 Matplotlib 中用于配置绘图全局参数的核心工具，相当于 Matplotlib 的“总设置面板”。
 plt.rcParams['axes.unicode_minus'] = False    # 解决负号显示问题
 
 plt.plot([1, 2, 3], [1, 4, 9])
