@@ -72,13 +72,21 @@ arr6 = np.arange(12, 24).reshape(2, 2, 3)
 res4 = np.concatenate((arr5, arr6), axis=0)
 print("3维沿深度拼接形状：", res4.shape)  # (4, 2, 3)
 
-# 场景4：形状不兼容报错
-print("\n=== 4. 常见错误：形状不兼容 ===")
+# 场景4：常见错误
+print("\n=== 4. 常见错误 ===")
+# 4.1 形状不兼容（非拼接轴维度不一致）
 arr7 = np.array([[1, 2]])  # 1行2列，与 arr3(2行3列) 列数不一致
 try:
     np.concatenate((arr3, arr7), axis=0)
 except ValueError as e:
-    print("报错信息：", e)
+    print("4.1 形状不兼容:", e)
+# 4.2 维度数不一致（all the input arrays must have same number of dimensions）
+a1 = np.array([[1, 2, 3], [4, 5, 6]])  # 2D
+a3 = np.random.randint(20, 30, size=(3,))  # 1D
+try:
+    np.concatenate((a1, a3))
+except ValueError as e:
+    print("4.2 维度数不一致:", e)
 
 # 场景5：vstack / hstack 与 concatenate 等价
 print("\n=== 5. vstack / hstack 简化版 ===")
