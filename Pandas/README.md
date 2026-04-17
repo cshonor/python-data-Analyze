@@ -6,12 +6,13 @@ Pandas 在量化中主要负责：**行情/因子数据清洗**、**时间序列
 
 ```text
 Pandas/
-├── 00-基础核心对象/                # Series / DataFrame 基础
-├── 01-核心数据操作/                # 索引筛选、聚合分组、合并连接、重塑透视
-├── 02-数据清洗与预处理/            # 缺失值/异常值/重复值/复权与行情清洗
-├── 03-时间序列与量化核心/          # DatetimeIndex、resample、rolling、shift(防未来函数)
-├── 04-可视化基础/                  # Matplotlib 与 pandas 集成绘图
-└── 05-量化实战案例/                # 策略/信号/绩效分析案例
+├── README.md
+├── 00_core_objects/
+├── 01_core_data_operations/
+├── 02_data_cleaning_preprocessing/
+├── 03_time_series_for_quant/
+├── 04_multi_asset_data_handling/
+└── 05_quant_practice_cases/
 ```
 
 ## 量化常见坑（建议先记住）
