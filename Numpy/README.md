@@ -24,6 +24,17 @@ NumPy 是 Python 科学计算的基础库，提供高性能的多维数组对象
 | numpy的数学函数和算术函数.md | 数学与算术函数 |
 | numpy查找排序.md | 查找、排序 |
 
+## 量化实用优先级（推荐学习顺序）
+
+1. `01.创建ndarray.py`
+2. `02.1.numpy数据类型.py`、`02.ndarray元素统一.py`
+3. `05.ndarray索引切片.py`、`06.ndarray形状操作.py`
+4. `09.ndarray的基本运算.md`、`10.广播机制.md`
+5. `ndarray的聚合函数.md`、`numpy的数学函数和算术函数.md`
+6. `numpy查找排序.md`（选股/因子排序常用）
+7. `07.ndarray级联concatenate.py`、`08.ndarray的拆分.md`
+8. `ndarray的append和insert.md`、`ndarray的delete扁平处理变形和翻转.md`（了解即可）
+
 ## 学习资源
 
 - [NumPy 官方文档](https://numpy.org/doc/stable/)
