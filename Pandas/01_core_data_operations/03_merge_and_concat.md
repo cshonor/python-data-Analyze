@@ -1,48 +1,77 @@
-# 数据合并与高级变换
+# Merge / Concat / Join（进阶版：多键、校验、重复键、时间对齐）
 
-> 覆盖：63-replace替换 → 70-交叉表和透视表
+> 本文件是 **进阶版**：基础概念见 `00_core_objects/07_dataframe_merge_concat_join.md`。这里专注量化里最容易踩坑的“多表对齐 + 键的唯一性 + 合并后的数据质量”。
 
-## 一、replace 替换
+## 1. 多键合并：`on=['date','code']`
 
-- 单值替换：`df['col'].replace(old_val, new_val)`
-- 多值/字典映射：`df['col'].replace([...], [...])` / `replace({...})`
-- 正则替换：`replace(regex=r'^a', value='A')`
+多资产数据（长表）最常见的主键是：
 
-## 二、map 处理精确匹配与模糊匹配
+- `date`（交易日）
+- `code`（股票代码）
 
-- 精确匹配：`df['col'].map({key1: val1, ...})`
-- 模糊匹配：结合 `str.contains()` 或正则
+合并价格表与因子表时，通常是：
 
-## 三、pandas 级联
+```python
+pd.merge(price, factor, on=['date','code'], how='left')
+```
 
-- 核心函数：`pd.concat([df1, df2], axis=0/1)`
-- 行级联 `axis=0` / 列级联 `axis=1`
-- 参数：`ignore_index=True` / `join='inner'`
+关键点：
 
-## 四、合并的基本逻辑和注意事项
+- 主键应当尽量“能唯一定位一行”
+- 合并前先检查键是否重复：`df.duplicated(['date','code']).sum()`
 
-- 合并本质：类似 SQL JOIN，基于公共键连接
-- 核心函数：`pd.merge(left_df, right_df, on='key')`
-- 注意键名一致、合并后数据量
+## 2. `how` 选择：你到底要保留谁？
 
-## 五、合并参数 left, right, how
+- `left`：以左表为基准（最常用：价格为基准，补因子/行业）
+- `inner`：只保留两边都有的数据（容易把停牌/缺失日直接删掉）
+- `outer`：全保留（方便排查缺失来源，但 NaN 会多）
 
-- `how`：`inner` / `left` / `right` / `outer`
-- 类比 SQL：`how='left'` ≈ LEFT JOIN
+## 3. 合并校验（强烈建议）：`validate=...`
 
-## 六、合并参数 left_on, right_on, on
+这是“防止数据悄悄错掉”的利器：
 
-- `on`：两表键名相同时
-- `left_on`、`right_on`：键名不同时
-- 多键：`on=['key1', 'key2']`
+- `validate='one_to_one'`
+- `validate='one_to_many'`
+- `validate='many_to_one'`
 
-## 七、groupby 分组
+示例（因子表每个 `(date,code)` 应该只有一条）：
 
-- 基本语法：`df.groupby('col').agg(func)`
-- 分组后：聚合 `sum/mean/count`、遍历 `for name, group in df.groupby('col')`、筛选 `filter`
+```python
+pd.merge(price, factor, on=['date','code'], how='left', validate='one_to_one')
+```
 
-## 八、交叉表和透视表
+如果键重复，它会直接报错，避免你带着错误数据继续回测。
 
-- 交叉表：`pd.crosstab(df['a'], df['b'])` 统计频数
-- 透视表：`pd.pivot_table(df, values='val', index='row', columns='col', aggfunc='mean')`
-- 类比 Excel 数据透视表
+## 4. 合并后必做的数据质量检查
+
+合并完成后建议固定做三步：
+
+- **行数是否异常膨胀**：重复键会导致笛卡尔积
+- **缺失值规模**：`isna().sum()`（哪些字段对不齐？）
+- **键是否仍唯一**：`duplicated(['date','code']).sum()`
+
+## 5. 时间序列对齐（量化专用提醒）
+
+“日期一样”不等于“交易日历一样”：
+
+- 指数、个股、期货可能交易日不一致
+- 财报/公告是低频数据，需要向前填充到交易日
+
+常见做法：
+
+- 低频字段合并后按 `code` 分组 `ffill`
+- 或用“发布日期”与“生效日期”明确对齐，避免未来函数
+
+## 6. `concat(axis=1)` 的高级用法：索引对齐 + 列名管理
+
+横向拼接适合“同一 index 下补列”：
+
+```python
+pd.concat([df_price, df_factor], axis=1)
+```
+
+前提：
+
+- index 必须是同一套（例如都以 `date` 为索引）
+- 否则会出现大量 NaN（不是错，但你要知道为什么）
+

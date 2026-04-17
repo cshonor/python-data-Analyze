@@ -1,44 +1,79 @@
-# 数据聚合与索引操作
+# GroupBy 与聚合（进阶版：多维分组 / agg 命名 / transform / 分层回测）
 
-> 覆盖：43-pandas聚合操作 → 48-stack和unstack操作
+> 本文件是 **进阶版**：默认你已经掌握 `00_core_objects/08_groupby_basics.md` 的基础语法。这里专注量化常用的“复杂分组 + 稳定输出 + 可回测结构”。
 
-## 一、pandas 聚合操作
+## 1. 多列分组：`groupby(['date','industry'])`
 
-- 核心聚合函数：`sum()` / `mean()` / `count()` / `min()` / `max()` / `std()`
-- 聚合方向：`axis=0`（列聚合）/ `axis=1`（行聚合）
-- 自定义聚合：`df.agg(func)` 支持传入多个函数或字典
-- 与 `groupby` 结合：分组后聚合是数据分析核心场景
+量化里最常见的两类分组：
 
-## 二、pandas 对象习题讲解
+- **时间截面分组**：`groupby('date')`（每天做一次截面统计/排名/分层）
+- **多维分组**：`groupby(['date','industry'])`（每天在行业内做标准化/排名）
 
-- 典型题型：基础运算与缺失值、数据筛选与索引、简单聚合统计
-- 解题思路：先理解需求 → 选择合适方法 → 验证结果
+关键点：
 
-## 三、pandas 单层索引
+- 你得到的是“分组对象”，最终输出结构会受 `as_index`、`sort` 影响
+- 分组键是否唯一，会决定后面 unstack/pivot 的可用性
 
-- 单层索引类型：`pd.Index`（默认）、`pd.RangeIndex`（连续整数）
-- 索引操作：
-  - 重命名：`df.rename(index={...}, columns={...})`
-  - 重置索引：`df.reset_index(drop=True)`（将索引转为列）
-  - 设置索引：`df.set_index('col')`（将列转为索引）
-- 索引唯一性：`index.is_unique` 检查是否重复
+## 2. `agg` 的正确打开方式：多指标、命名输出、可读结果
 
-## 四、pandas 多层索引
+### 2.1 单列多函数
 
-- 多层索引（MultiIndex）：行/列支持多级标签，适合分层数据
-- 构造方式：
-  - 从元组列表创建：`pd.MultiIndex.from_tuples([...])`
-  - 从笛卡尔积创建：`pd.MultiIndex.from_product([level1, level2])`
-- 层级命名：`index.names = ['level1', 'level2']`
+```python
+df.groupby('date')['ret'].agg(['mean', 'std', 'count'])
+```
 
-## 五、多层索引的访问
+### 2.2 多列多函数（字典写法）
 
-- 按层级访问：`df.loc[('level1_val', 'level2_val'), :]`
-- 跨层级筛选：`df.xs('val', level='level_name')`
-- 列多层索引：与行索引访问逻辑一致
+```python
+df.groupby('date').agg({'ret': ['mean', 'std'], 'volume': 'sum'})
+```
 
-## 六、stack 和 unstack 操作
+### 2.3 推荐：命名聚合（最清晰、最稳定）
 
-- `stack()`：将列索引转为行索引（宽表转长表）
-- `unstack()`：将行索引转为列索引（长表转宽表）
-- 核心作用：重塑数据形状，适配不同分析场景
+```python
+df.groupby('date').agg(
+    ret_mean=('ret', 'mean'),
+    ret_std=('ret', 'std'),
+    vol_sum=('volume', 'sum'),
+)
+```
+
+命名聚合的优势：
+
+- 输出列名可控，不会生成多级列索引（少踩坑）
+- 更适合落盘、画图、回测对接
+
+## 3. `transform`：返回与原表等长（生成新列必备）
+
+与 `agg` 不同，`transform` 的结果长度与原 DataFrame 相同，常用于“分组后回填到每一行”：
+
+- **行业中性（简化版）**：`x - group_mean`
+- **组内标准化**：\((x-\mu)/\sigma\)
+- **组内 rank**：常用 `rank(pct=True)`
+
+示例（行业内去均值）：
+
+```python
+df['factor_neutral'] = df['factor'] - df.groupby(['date','industry'])['factor'].transform('mean')
+```
+
+## 4. 截面分层回测：`qcut` 分组 + `unstack` 变成收益曲线矩阵
+
+典型流程（每天按因子把股票分 5 组）：
+
+1. `groupby('date')['factor'].rank(pct=True)` 计算截面分位
+2. `qcut` 或分位阈值得到 `group`
+3. `groupby(['date','group'])['ret_next'].mean()` 得到每组收益
+4. `unstack()` 变成 “行=日期，列=分组” 的收益矩阵
+
+注意：
+
+- **收益必须是未来一期**（比如次日收益 `ret_next`），否则就是未来函数
+- 分层前先处理缺失值和极端值，否则分位会失真
+
+## 5. 性能与坑（你会真的遇到）
+
+- **优先用 `agg/transform`，少用 `apply`**：`apply` 灵活但慢
+- 分组键里有 `NaN`：默认会被丢到一个“缺失组”之外（行为依版本/参数），建议提前处理
+- `groupby(..., sort=False)`：大数据时能省一点时间，但输出顺序要自己保证
+
